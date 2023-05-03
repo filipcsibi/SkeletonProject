@@ -14,12 +14,15 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {MainNavigator} from './src/navigation/navigators/MainNavigator';
 import {AppNavigator} from './src/navigation/navigators/AppNavigator';
+import {LoginForm} from './src/modules/auth/components/login-form';
+import {Account} from './src/modules/account/screens/account';
 
 function App(): JSX.Element {
   return (
     <NavigationContainer>
       <AppNavigator></AppNavigator>
     </NavigationContainer>
+    // <Account>
   );
 }
 

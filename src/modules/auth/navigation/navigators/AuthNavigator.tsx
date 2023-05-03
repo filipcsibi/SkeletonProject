@@ -1,17 +1,12 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import {AuthRouteProps, AuthRoutes} from '../routes/auth_routes';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {LoginForm} from '../../components/login-form';
+import {Login} from '../../screens/login';
 
 const Auth = createStackNavigator<AuthRouteProps>();
 
 export const AuthNavigator = () => {
-  const Login = () => {
-    return (
-      <View style={styles.loginscreen}>
-        <Text>{AuthRoutes.Login}</Text>
-      </View>
-    );
-  };
   return (
     <Auth.Navigator>
       <Auth.Screen name={AuthRoutes.Login} component={Login} />
