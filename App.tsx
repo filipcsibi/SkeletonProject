@@ -16,6 +16,7 @@ import {MainNavigator} from './src/navigation/navigators/MainNavigator';
 import {AppNavigator} from './src/navigation/navigators/AppNavigator';
 import {LoginForm} from './src/modules/auth/components/login-form';
 import {Account} from './src/modules/account/screens/account';
+import {EditScreen} from './src/modules/account/screens/editaccount';
 
 function App(): JSX.Element {
   return (
@@ -23,6 +24,7 @@ function App(): JSX.Element {
       <AppNavigator></AppNavigator>
     </NavigationContainer>
     // <Account>
+    // <EditScreen></EditScreen>
   );
 }
 

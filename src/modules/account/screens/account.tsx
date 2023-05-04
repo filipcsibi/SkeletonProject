@@ -1,22 +1,52 @@
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Pressable} from 'react-native';
 import {Avatar} from '../components/avatar';
 import {AuthState, useAuthStore} from '../../auth/store/useAuthStore';
+import ImagePicker from 'react-native-image-crop-picker';
+import {useState} from 'react';
+import {User} from '../../auth/types/users';
 
 export const Account = () => {
-  const {currentUser} = useAuthStore((state: AuthState) => {
+  const {currentUser, updateUser} = useAuthStore((state: AuthState) => {
     return {
       currentUser: state.currentUser,
+      updateUser: state.updateUser,
     };
   });
   console.log(currentUser);
+  const [image, setImage] = useState<string>('');
+
+  const onPickImage = async () => {
+    const image = await ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true,
+      includeBase64: true,
+      mediaType: 'photo',
+    });
+    console.log('image', image);
+
+    const user = {
+      ...currentUser,
+      profilePicture: `data:${image.mime};base64,${image.data}`,
+    } as User;
+
+    updateUser(user);
+  };
 
   return (
     <View style={styles.main}>
-      <View style={styles.avatar}>
-        <Avatar user={currentUser}></Avatar>
+      <Pressable style={styles.avatar} onPress={onPickImage}>
+        <Avatar user={currentUser} />
+      </Pressable>
+      <View>
+        <Text style={{fontSize: 20, color: 'white'}}>My Account</Text>
       </View>
-      <View style={styles.container}></View>
-      <View style={styles.container}></View>
+      <View style={styles.container}>
+        <Text>{currentUser?.email}</Text>
+      </View>
+      <View style={styles.container}>
+        <Text>{currentUser?.userName}</Text>
+      </View>
     </View>
   );
 };
@@ -30,6 +60,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: '80%',
     height: '5%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   main: {
     backgroundColor: 'black',
@@ -39,10 +71,12 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   avatar: {
-    width: '50%',
+    borderColor: 'green',
+    borderWidth: 2,
+    width: '35%',
     height: '20%',
-    borderRadius: 50,
+    borderRadius: 100,
     backgroundColor: 'white',
-    marginBottom: 100,
+    marginBottom: 50,
   },
 });

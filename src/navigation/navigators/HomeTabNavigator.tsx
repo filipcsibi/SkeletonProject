@@ -4,6 +4,9 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {PersonIcon, HomeIcon, StarIcon} from '../../assets/icons';
 import {AuthState, useAuthStore} from '../../modules/auth/store/useAuthStore';
 import {Account} from '../../modules/account/screens/account';
+import {MainRoutes} from '../routes/main_routes';
+import {useNavigation} from '@react-navigation/native';
+import {Home} from '../../modules/tvshows/screens/home';
 
 const HomeTab = createBottomTabNavigator<HomeTabRouteProps>();
 
@@ -13,20 +16,7 @@ export const HomeTabNavigator = () => {
       logout: state.logout,
     };
   });
-  const Home = () => {
-    return (
-      <View style={styles.home}>
-        <Text>{HomeTabRoutes.Home}</Text>
-        <Pressable
-          style={{
-            width: 100,
-            height: 50,
-            backgroundColor: 'magenta',
-          }}
-          onPress={logout}></Pressable>
-      </View>
-    );
-  };
+  const navigation = useNavigation();
   const Favorites = () => {
     return (
       <View style={styles.favorites}>
@@ -34,15 +24,34 @@ export const HomeTabNavigator = () => {
       </View>
     );
   };
-  const Profile = () => {
+  const Edit = () => {
     return (
-      <View style={styles.profile}>
-        <Text>{HomeTabRoutes.Profile}</Text>
-      </View>
+      <Pressable
+        style={styles.pressable}
+        onPress={() => navigation.navigate(MainRoutes.EditProfile)}>
+        <Text style={{alignSelf: 'center', color: 'blue', fontSize: 20}}>
+          Edit
+        </Text>
+      </Pressable>
+    );
+  };
+  const Logout = () => {
+    return (
+      <Pressable
+        style={{
+          width: 100,
+          height: 50,
+          backgroundColor: 'magenta',
+        }}
+        onPress={logout}></Pressable>
     );
   };
   return (
-    <HomeTab.Navigator screenOptions={{headerShown: false}}>
+    <HomeTab.Navigator
+      screenOptions={{
+        headerShown: true,
+        headerLeft: Logout,
+      }}>
       <HomeTab.Screen
         name={HomeTabRoutes.Home}
         component={Home}
@@ -63,6 +72,7 @@ export const HomeTabNavigator = () => {
         name={HomeTabRoutes.Profile}
         component={Account}
         options={{
+          headerRight: Edit,
           tabBarShowLabel: false,
           tabBarIcon: () => <PersonIcon width={30} height={30} />,
         }}
@@ -71,6 +81,13 @@ export const HomeTabNavigator = () => {
   );
 };
 const styles = StyleSheet.create({
+  pressable: {
+    borderRadius: 10,
+    justifyContent: 'center',
+    flex: 1,
+    width: 100,
+    height: 50,
+  },
   home: {
     flex: 1,
     backgroundColor: 'red',

@@ -10,7 +10,9 @@ export const Avatar = (props: Props) => {
   return (
     <View style={{flex: 1, justifyContent: 'center'}}>
       {props.user?.profilePicture ? (
-        <Image source={[]} style={{flex: 1}}></Image>
+        <Image
+          source={{uri: props.user.profilePicture}}
+          style={{flex: 1, borderRadius: 100}}></Image>
       ) : (
         <View>
           <Text style={{fontSize: 20, color: 'black', alignSelf: 'center'}}>

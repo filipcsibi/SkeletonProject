@@ -6,11 +6,12 @@ import {zustandStorage} from '../../../store/zustandStorage';
 export interface AuthState {
   //   token: string | null;
   //   setToken: (token: string | null) => void;
-  users: User[] | null;
+  users: User[];
   currentUser: User | null;
   getUser: (id: string) => void;
   setCurrentUser: (user: User | null) => void;
   logout: () => void;
+  updateUser: (user: User) => void;
 }
 
 export const userdata: User[] = [
@@ -47,6 +48,16 @@ export const useAuthStore = create(
         set((state: AuthState) => ({...state, currentUser: newUser}));
       },
       logout: () => set({currentUser: null}),
+      updateUser: (user: User) => {
+        const index = get().users?.findIndex(i => i.id === user?.id);
+        const newUsers = get().users;
+        newUsers[index] = user;
+        set((state: AuthState) => ({
+          ...state,
+          users: newUsers,
+          currentUser: user,
+        }));
+      },
     }),
     {name: 'movie-storage-2', storage: createJSONStorage(() => zustandStorage)},
   ),
