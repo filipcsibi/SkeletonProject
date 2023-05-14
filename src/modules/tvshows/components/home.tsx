@@ -1,8 +1,13 @@
-import {View, Pressable, Text, StyleSheet} from 'react-native';
-import {HomeTabRoutes} from '../../../navigation/routes/hometab_routes';
-import {AuthState, useAuthStore} from '../../auth/store/useAuthStore';
+import {View, Pressable, Text, StyleSheet, TextInput} from 'react-native';
 import {useState} from 'react';
 import Modal from 'react-native-modal';
+import {SerieList} from '../screens/seriesList';
+import {DownIcon} from '../../../assets/icons';
+import {StackScreenProps} from '@react-navigation/stack';
+import {
+  HomeTabRouteProps,
+  HomeTabRoutes,
+} from '../../../navigation/routes/hometab_routes';
 //https://6453db49e9ac46cedf31a3d0.mockapi.io/tvshows
 
 /*
@@ -24,23 +29,40 @@ queryParams: search,page,field_name,
     pe edit profile add intrese,cand le adaugam sa le vedem sub tot in edit gen si si pe profile screenr
 
 */
-export const Home = () => {
+export const Home = (
+  props: StackScreenProps<HomeTabRouteProps, HomeTabRoutes.Home>,
+) => {
+  const [search, setSearch] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const Filter = () => {
     setModalVisible(true);
   };
   return (
     <View style={styles.home}>
-      <Pressable
-        onPress={Filter}
+      <View style={styles.view}>
+        <Text style={styles.text}>Series</Text>
+      </View>
+      <View
         style={{
-          marginTop: 50,
-          marginRight: 10,
-          flex: 1,
-          alignSelf: 'flex-end',
+          backgroundColor: 'white',
+          margin: 10,
+          marginBottom: 0,
+          borderRadius: 20,
+          padding: 5,
+          flexDirection: 'row',
+          alignItems: 'center',
         }}>
-        <Text style={styles.filter}>Filter</Text>
-      </Pressable>
+        <TextInput
+          style={{flex: 1, fontSize: 20}}
+          value={search}
+          placeholder="Search..."
+          onChangeText={setSearch}></TextInput>
+        <Pressable onPress={Filter} style={{flexDirection: 'row'}}>
+          <Text style={styles.filter}>Filter</Text>
+          <DownIcon width={25} height={25} fill={'blue'}></DownIcon>
+        </Pressable>
+      </View>
+      <SerieList {...props} />
       <Modal
         onBackdropPress={() => setModalVisible(false)}
         isVisible={modalVisible}
@@ -66,19 +88,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   filter: {
-    fontSize: 20,
+    fontSize: 18,
     color: 'blue',
-  },
-  pressable: {
-    borderRadius: 10,
-    justifyContent: 'center',
-    flex: 1,
-    width: 100,
-    height: 50,
   },
   home: {
     flex: 1,
-    backgroundColor: 'red',
+    backgroundColor: '#733592',
   },
   favorites: {
     flex: 1,
@@ -88,4 +103,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'green',
   },
+  view: {
+    marginTop: 10,
+    borderRadius: 20,
+    height: 60,
+    width: '95%',
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
+  text: {fontSize: 30, color: '#461160', fontWeight: 'bold'},
 });

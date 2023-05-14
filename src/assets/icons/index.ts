@@ -8,6 +8,9 @@ import ShieldIcon from './shield-outline.svg';
 import StarIcon from './star-outline.svg';
 import SunIcon from './sun-outline.svg';
 import BackIcon from './arrow-ios-back-outline.svg';
+import DownIcon from './chevron-down-outline.svg';
+import HeartIcon from './heart-outline (2).svg';
+import HeartFillIcon from './heart.svg';
 export {
   HomeIcon,
   PersonIcon,
@@ -19,4 +22,7 @@ export {
   StarIcon,
   SunIcon,
   BackIcon,
+  DownIcon,
+  HeartIcon,
+  HeartFillIcon,
 };

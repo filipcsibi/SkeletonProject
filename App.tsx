@@ -17,12 +17,14 @@ import {AppNavigator} from './src/navigation/navigators/AppNavigator';
 import {LoginForm} from './src/modules/auth/components/login-form';
 import {Account} from './src/modules/account/screens/account';
 import {EditScreen} from './src/modules/account/screens/editaccount';
+import {MovieList} from './src/modules/tvshows/screens/seriesList';
 
 function App(): JSX.Element {
   return (
     <NavigationContainer>
       <AppNavigator></AppNavigator>
     </NavigationContainer>
+    // <MovieList></MovieList>
     // <Account>
     // <EditScreen></EditScreen>
   );

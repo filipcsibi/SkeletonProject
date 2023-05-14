@@ -11,7 +11,7 @@ export const Login = () => {
   });
 
   const onLogin = (email: string, password: string) => {
-    console.log({email, password, users});
+    console.log({users});
     const user = users?.find((user: User) => {
       return user.email === email && user.password === password;
     });
