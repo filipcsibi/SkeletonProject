@@ -4,5 +4,5 @@ export interface Series {
   description: string;
   image: string;
   genre: string;
-  releasedate: string;
+  releaseDate: string;
 }

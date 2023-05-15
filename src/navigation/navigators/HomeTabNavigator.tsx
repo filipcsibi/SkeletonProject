@@ -8,27 +8,22 @@ import {useNavigation} from '@react-navigation/native';
 import {SerieList} from '../../modules/tvshows/screens/seriesList';
 import {Home} from '../../modules/tvshows/components/home';
 import {FavoriteList} from '../../modules/tvshows/screens/favoriteList';
+import {Favorites} from '../../modules/tvshows/components/favorites';
 
 const HomeTab = createBottomTabNavigator<HomeTabRouteProps>();
 
-export const HomeTabNavigator = () => {
+export const HomeTabNavigator = ({navigation}: any) => {
   const title = require('../../assets/images/title.png');
   const {logout} = useAuthStore((state: AuthState) => {
     return {
       logout: state.logout,
     };
   });
-  const navigation = useNavigation();
-  const Favorites = () => {
-    return (
-      <View style={styles.favorites}>
-        <Text>{HomeTabRoutes.Favorites}</Text>
-      </View>
-    );
-  };
   const Edit = () => {
     return (
-      <Pressable style={styles.pressable} onPress={() => navigation.navigate()}>
+      <Pressable
+        style={styles.pressable}
+        onPress={() => navigation.navigate('editprofile')}>
         <Text style={styles.edit}>Edit</Text>
       </Pressable>
     );
@@ -69,7 +64,7 @@ export const HomeTabNavigator = () => {
       />
       <HomeTab.Screen
         name={HomeTabRoutes.Favorites}
-        component={FavoriteList}
+        component={Favorites}
         options={{
           tabBarShowLabel: false,
           tabBarIcon: ({focused}) => (

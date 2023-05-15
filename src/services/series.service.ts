@@ -1,8 +1,7 @@
-export const fetchSeries = async (page: number) => {
+export const fetchSeries = async (limit: number, page: number) => {
   const response = await fetch(
-    `https://run.mocky.io/v3/f571b31b-8087-45aa-9f93-5e77e48673d2?limit=3&page=${page}`,
+    `https://646228d5185dd9877e4c9c5b.mockapi.io/series?limit=${limit}&page=${page}`,
   );
   const data = await response.json();
-  // console.log(data);
   return data;
 };

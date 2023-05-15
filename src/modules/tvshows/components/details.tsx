@@ -1,18 +1,6 @@
-import {
-  FlatList,
-  ListRenderItemInfo,
-  Text,
-  View,
-  Image,
-  StyleSheet,
-  Pressable,
-} from 'react-native';
-import {useState} from 'react';
-
+import {Text, View, Image, StyleSheet, Pressable} from 'react-native';
 import {SeriesStore, useSeriesStore} from '../store/useSeriesStore';
-import {StackScreenProps} from '@react-navigation/stack';
 import {HeartFillIcon, HeartIcon} from '../../../assets/icons';
-import {Series} from '../types/series';
 import {AuthState, useAuthStore} from '../../auth/store/useAuthStore';
 
 export const MySerieDetails = () => {
@@ -21,24 +9,42 @@ export const MySerieDetails = () => {
       currentSerie: state.currentSerie,
     };
   });
-  const {getFavorites, favorites} = useAuthStore((state: AuthState) => {
+  const {
+    getFavorites,
+    favorites,
+    addFavoritesForUser,
+    currentUser,
+    users,
+    getUserFavorites,
+    removeFavoriteForUser,
+  } = useAuthStore((state: AuthState) => {
     return {
       getFavorites: state.getFavorites,
       favorites: state.favorites,
+      addFavoritesForUser: state.addFavoritesForUser,
+      currentUser: state.currentUser,
+      users: state.users,
+      getUserFavorites: state.getUserFavorites,
+      removeFavoriteForUser: state.removeFavoriteForUser,
     };
   });
-
+  const direct = getUserFavorites(currentUser?.id);
   const handleFavorite = () => {
     if (!currentSerie) return;
-    if (!favorites.find(fav => fav.id === currentSerie.id)) {
-      getFavorites([...favorites, currentSerie]);
+
+    if (!direct?.find(fav => fav.id === currentSerie.id)) {
+      //getFavorites([...favorites, currentSerie]);
+      addFavoritesForUser(currentUser?.id, currentSerie);
+
       console.log('favorited');
     } else {
-      getFavorites(favorites.filter(fav => fav.id !== currentSerie.id));
+      // getFavorites(favorites.filter(fav => fav.id !== currentSerie.id));
+      removeFavoriteForUser(currentUser?.id, currentSerie.id);
+
       console.log('unfavorited');
     }
   };
-
+  console.log(direct);
   return (
     <View style={styles.main}>
       <View style={styles.view}>
@@ -46,16 +52,12 @@ export const MySerieDetails = () => {
       </View>
 
       <View style={styles.two}>
-        <View
-          style={{
-            marginBottom: 5,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <Text style={styles.title}>{currentSerie?.title}</Text>
+        <View style={styles.detail}>
+          <View style={styles.fixedtitle}>
+            <Text style={styles.title}>{currentSerie?.title}</Text>
+          </View>
           <Pressable onPress={handleFavorite}>
-            {favorites.find(fav => fav.id === currentSerie?.id) ? (
+            {direct?.find(fav => fav.id === currentSerie?.id) ? (
               <HeartFillIcon
                 width={50}
                 height={50}
@@ -67,11 +69,11 @@ export const MySerieDetails = () => {
         </View>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text style={styles.three}>{currentSerie?.genre}</Text>
-          <Text style={styles.three}>{currentSerie?.releasedate}</Text>
+          <Text style={styles.three}>{currentSerie?.releaseDate}</Text>
         </View>
         <View style={styles.text}>
           <Text style={styles.four}>Description:</Text>
-          <Text style={[styles.four, {color: 'white'}]}>
+          <Text style={[styles.four, {color: 'black'}]}>
             {currentSerie?.description}
           </Text>
         </View>
@@ -80,8 +82,15 @@ export const MySerieDetails = () => {
   );
 };
 const styles = StyleSheet.create({
+  fixedtitle: {height: 115, width: 240, flex: 0},
+  detail: {
+    marginBottom: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   text: {
-    backgroundColor: 'gray',
+    backgroundColor: 'white',
     height: '90%',
     borderRadius: 30,
   },
@@ -114,8 +123,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   title: {
-    fontSize: 35,
+    fontSize: 30,
     fontWeight: '900',
-    color: 'yellow',
+    color: 'black',
   },
 });

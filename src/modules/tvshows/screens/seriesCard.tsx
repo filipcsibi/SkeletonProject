@@ -17,17 +17,21 @@ export const SerieCard = (data: props) => {
       currentSerie: state.currentSerie,
     };
   });
-  const {getFavorites, favorites} = useAuthStore((state: AuthState) => {
-    return {
-      getFavorites: state.getFavorites,
-      favorites: state.favorites,
-    };
-  });
+  const {getFavorites, favorites, currentUser, removeFavoriteForUser} =
+    useAuthStore((state: AuthState) => {
+      return {
+        currentUser: state.currentUser,
+        getFavorites: state.getFavorites,
+        favorites: state.favorites,
+        removeFavoriteForUser: state.removeFavoriteForUser,
+      };
+    });
 
   const route = useRoute();
   const activeTab = route.name;
   const onPress = () => {
-    getFavorites(favorites.filter(fav => fav.id !== data.item.id));
+    removeFavoriteForUser(currentUser?.id, data.item.id);
+    // setFavoritesForUser(currentUser?.id,favorites.filter(fav => fav.id !== data.item.id));
     console.log(data);
   };
 
@@ -39,26 +43,32 @@ export const SerieCard = (data: props) => {
         style={styles.context}
         borderRadius={30}>
         <View style={styles.mainview}>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}>
-            <Text style={styles.title}>{data.item.title}</Text>
-            {activeTab === 'favoritesscreen' ? (
-              <Pressable onPress={onPress}>
-                <HeartFillIcon
-                  width={50}
-                  height={50}
-                  fill={'red'}></HeartFillIcon>
-              </Pressable>
-            ) : null}
+          <View style={styles.viewsecond}>
+            <View style={styles.titlebig}>
+              <Text style={styles.title}>{data.item.title}</Text>
+            </View>
+            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              {activeTab === 'favoritesscreen' ? (
+                <View
+                  style={{
+                    flex: 0,
+                  }}>
+                  <Pressable onPress={onPress}>
+                    <HeartFillIcon
+                      width={50}
+                      height={50}
+                      fill={'red'}></HeartFillIcon>
+                  </Pressable>
+                </View>
+              ) : null}
+              <View style={{flex: 0}}>
+                <Text style={styles.title}>{data.item.id}</Text>
+              </View>
+            </View>
           </View>
           <View style={styles.details}>
             <View>
-              <Text style={styles.release}>{data.item.releasedate}</Text>
+              <Text style={styles.release}>{data.item.releaseDate}</Text>
             </View>
             <View style={styles.detailsbutton}>
               <Pressable onPress={data.onPress}>
@@ -76,6 +86,17 @@ export const SerieCard = (data: props) => {
 };
 
 const styles = StyleSheet.create({
+  viewsecond: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  titlebig: {
+    flex: 0,
+    height: 120,
+    width: 250,
+  },
   detailsbutton: {
     backgroundColor: '#461160',
     borderRadius: 340,
@@ -101,9 +122,9 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   release: {
-    color: '#461160',
+    color: 'black',
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: '700',
     textAlignVertical: 'top',
     opacity: 0.7,
     marginBottom: 20,
@@ -119,7 +140,7 @@ const styles = StyleSheet.create({
   },
   a: {},
   title: {
-    color: 'yellow',
+    color: 'black',
     fontSize: 30,
     fontWeight: 'bold',
   },

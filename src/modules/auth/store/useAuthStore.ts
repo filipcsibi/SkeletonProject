@@ -16,6 +16,21 @@ export interface AuthState {
   updateUser: (user: User) => void;
   favorites: Series[];
   getFavorites: (favorites: Series[]) => void;
+  addFavoritesForUser: (userId: string | undefined, favorites: Series) => void;
+  getUserFavorites: (userId: string | undefined) => Series[] | undefined;
+  removeFavoriteForUser: (
+    userId: string | undefined,
+    favoriteId: string,
+  ) => void;
+  updateInterest: (
+    userId: string | undefined,
+    interest: string,
+    which: string,
+  ) => void;
+  getUserIntrests: (
+    userId: string | undefined,
+    which: string,
+  ) => string | undefined;
 }
 
 export const useAuthStore = create(
@@ -28,7 +43,9 @@ export const useAuthStore = create(
           password: 'filip123',
           profilePicture: 'direct',
           userName: 'filipescu',
-          seriesType: ['police', '2', '3'],
+          favorites: [],
+          intrest1: 'reactnative',
+          intrest2: 'typescript',
         },
         {
           id: '2',
@@ -36,7 +53,9 @@ export const useAuthStore = create(
           password: 'filip123',
           profilePicture: 'direct',
           userName: 'filipescu',
-          seriesType: ['police', '2', '3'],
+          favorites: [],
+          intrest1: 'masini',
+          intrest2: 'pizza',
         },
         {
           id: '3',
@@ -44,7 +63,9 @@ export const useAuthStore = create(
           password: 'filip123',
           profilePicture: 'direct',
           userName: 'filipescu',
-          seriesType: ['police', '2', '3'],
+          favorites: [],
+          intrest1: 'react-native',
+          intrest2: 'mancare',
         },
       ],
       currentUser: null,
@@ -69,7 +90,80 @@ export const useAuthStore = create(
       favorites: [],
       getFavorites: (arr: Series[]) =>
         set((state: AuthState) => ({favorites: arr})),
+
+      addFavoritesForUser: (userId: string | undefined, favorite: Series) => {
+        const userIndex = get().users.findIndex(user => user.id === userId);
+
+        const updatedFavorites = [
+          ...get().users[userIndex].favorites,
+          favorite,
+        ];
+        const updatedUser = {
+          ...get().users[userIndex],
+          favorites: updatedFavorites,
+        };
+        const updatedUsers = [...get().users];
+        updatedUsers[userIndex] = updatedUser;
+        set((state: AuthState) => ({
+          ...state,
+          users: updatedUsers,
+        }));
+      },
+
+      getUserFavorites: (userId: string | undefined) => {
+        const user = get().users.find(user => user.id === userId);
+        return user?.favorites;
+      },
+      removeFavoriteForUser: (
+        userId: string | undefined,
+        favoriteId: string,
+      ) => {
+        const userIndex = get().users.findIndex(user => user.id === userId);
+        const favorites = get().users[userIndex].favorites;
+        const favoriteIndex = favorites.findIndex(
+          favorite => favorite.id === favoriteId,
+        );
+        const updatedUser = {
+          ...get().users[userIndex],
+          favorites: [
+            ...favorites.slice(0, favoriteIndex),
+            ...favorites.slice(favoriteIndex + 1),
+          ],
+        };
+        const updatedUsers = [...get().users];
+        updatedUsers[userIndex] = updatedUser;
+        set((state: AuthState) => ({
+          ...state,
+          users: updatedUsers,
+        }));
+      },
+      updateInterest: (
+        userId: string | undefined,
+        interest: string,
+        which: string,
+      ) => {
+        const userIndex = get().users.findIndex(user => user.id === userId);
+
+        if (userIndex !== -1) {
+          const updatedUsers = [...get().users];
+          const updatedUser = {...updatedUsers[userIndex]};
+
+          if (which === '1') updatedUser.intrest1 = interest;
+          else updatedUser.intrest2 = interest;
+          updatedUsers[userIndex] = updatedUser;
+
+          set((state: AuthState) => ({
+            ...state,
+            users: updatedUsers,
+          }));
+        }
+      },
+      getUserIntrests: (userId: string | undefined, which: string) => {
+        const user = get().users.find(user => user.id === userId);
+        if (which === '1') return user?.intrest1;
+        else return user?.intrest2;
+      },
     }),
-    {name: 'movie-storage', storage: createJSONStorage(() => zustandStorage)},
+    {name: 'movie-storage-6', storage: createJSONStorage(() => zustandStorage)},
   ),
 );

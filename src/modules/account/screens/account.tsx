@@ -1,45 +1,31 @@
-import {StyleSheet, View, Text, Pressable} from 'react-native';
+import {StyleSheet, View, Text, Pressable, Image} from 'react-native';
 import {Avatar} from '../components/avatar';
 import {AuthState, useAuthStore} from '../../auth/store/useAuthStore';
 import ImagePicker from 'react-native-image-crop-picker';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {User} from '../../auth/types/users';
 
 export const Account = () => {
-  const {currentUser, updateUser} = useAuthStore((state: AuthState) => {
-    return {
-      currentUser: state.currentUser,
-      updateUser: state.updateUser,
-    };
-  });
-  console.log(currentUser);
-  const [image, setImage] = useState<string>('');
+  const {currentUser, updateUser, getUserIntrests} = useAuthStore(
+    (state: AuthState) => {
+      return {
+        currentUser: state.currentUser,
+        updateUser: state.updateUser,
+        getUserIntrests: state.getUserIntrests,
+      };
+    },
+  );
 
-  const onPickImage = async () => {
-    const image = await ImagePicker.openPicker({
-      width: 300,
-      height: 400,
-      cropping: true,
-      includeBase64: true,
-      mediaType: 'photo',
-    });
-    console.log('image', image);
-
-    const user = {
-      ...currentUser,
-      profilePicture: `data:${image.mime};base64,${image.data}`,
-    } as User;
-
-    updateUser(user);
-  };
+  const avatar = require('../../../assets/images/pozaavatar.jpeg');
 
   return (
     <View style={styles.main}>
-      <Pressable style={styles.avatar} onPress={onPickImage}>
-        <Avatar user={currentUser} />
+      <Text style={styles.username}>Hi, {currentUser?.userName}!</Text>
+      <Pressable style={styles.avatar}>
+        <Image source={avatar} style={styles.avatarphoto}></Image>
       </Pressable>
       <View>
-        <Text style={{fontSize: 20, color: 'white'}}>My Account</Text>
+        <Text style={styles.text}>My Account</Text>
       </View>
       <View style={styles.container}>
         <Text>{currentUser?.email}</Text>
@@ -47,10 +33,32 @@ export const Account = () => {
       <View style={styles.container}>
         <Text>{currentUser?.userName}</Text>
       </View>
+      <View>
+        <Text style={styles.text}>Intrests</Text>
+      </View>
+      <View style={styles.container}>
+        <Text>{currentUser?.intrest1}</Text>
+      </View>
+      <View style={styles.container}>
+        <Text>{currentUser?.intrest2}</Text>
+      </View>
     </View>
   );
 };
 const styles = StyleSheet.create({
+  username: {
+    fontSize: 40,
+    color: 'white',
+    fontWeight: 'bold',
+    marginTop: -100,
+  },
+  avatarphoto: {
+    resizeMode: 'cover',
+    width: 175,
+    height: 175,
+    borderRadius: 100,
+  },
+  text: {fontSize: 20, color: 'white'},
   button: {
     backgroundColor: 'red',
     width: '40%',
@@ -60,23 +68,43 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: '80%',
     height: '5%',
-    alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 10,
+    paddingLeft: 10,
   },
   main: {
-    backgroundColor: 'black',
+    backgroundColor: '#733592',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     gap: 10,
   },
   avatar: {
-    borderColor: 'green',
-    borderWidth: 2,
-    width: '35%',
-    height: '20%',
+    flex: 0,
+    borderColor: 'black',
+    borderWidth: 3,
     borderRadius: 100,
     backgroundColor: 'white',
-    marginBottom: 50,
+    marginBottom: 30,
   },
 });
+
+//const [image, setImage] = useState<string>('');
+
+// const onPickImage = async () => {
+//   const image = await ImagePicker.openPicker({
+//     width: 300,
+//     height: 400,
+//     cropping: true,
+//     includeBase64: true,
+//     mediaType: 'photo',
+//   });
+//   console.log('image', image);
+
+//   const user = {
+//     ...currentUser,
+//     profilePicture: `data:${image.mime};base64,${image.data}`,
+//   } as User;
+
+//   updateUser(user);
+// };

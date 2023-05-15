@@ -29,10 +29,12 @@ queryParams: search,page,field_name,
     pe edit profile add intrese,cand le adaugam sa le vedem sub tot in edit gen si si pe profile screenr
 
 */
+
 export const Home = (
   props: StackScreenProps<HomeTabRouteProps, HomeTabRoutes.Home>,
 ) => {
   const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState(false);
   const Filter = () => {
     setModalVisible(true);
@@ -42,16 +44,7 @@ export const Home = (
       <View style={styles.view}>
         <Text style={styles.text}>Series</Text>
       </View>
-      <View
-        style={{
-          backgroundColor: 'white',
-          margin: 10,
-          marginBottom: 0,
-          borderRadius: 20,
-          padding: 5,
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}>
+      <View style={styles.textsecund}>
         <TextInput
           style={{flex: 1, fontSize: 20}}
           value={search}
@@ -62,19 +55,47 @@ export const Home = (
           <DownIcon width={25} height={25} fill={'blue'}></DownIcon>
         </Pressable>
       </View>
-      <SerieList {...props} />
+      <SerieList {...props} props={search} filter1={filter} />
       <Modal
         onBackdropPress={() => setModalVisible(false)}
         isVisible={modalVisible}
         style={styles.modal}>
         <View>
-          <Text>Filters:</Text>
+          <Text style={styles.filtertext}>Filters:</Text>
+          <View style={{flexDirection: 'row'}}>
+            <Pressable style={styles.ascending} onPress={() => setFilter(true)}>
+              <Text style={{fontWeight: 'bold'}}>Ascending</Text>
+            </Pressable>
+          </View>
         </View>
       </Modal>
     </View>
   );
 };
 const styles = StyleSheet.create({
+  textsecund: {
+    backgroundColor: 'white',
+    margin: 10,
+    marginBottom: 0,
+    borderRadius: 20,
+    padding: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  filtertext: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'black',
+    marginBottom: 10,
+  },
+  ascending: {
+    width: 150,
+    height: 50,
+    backgroundColor: 'gray',
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   modal: {
     backgroundColor: 'white',
     marginTop: '100%',
@@ -84,8 +105,8 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     opacity: 0.9,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'flex-start',
+    padding: 20,
   },
   filter: {
     fontSize: 18,
