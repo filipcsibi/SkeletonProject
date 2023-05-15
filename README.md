@@ -20,8 +20,6 @@ SeriesFav utilizes the following technologies and libraries:
 
 -Zustand: The Persist middleware enables you to store your Zustand state in a storage (e.g., localStorage , AsyncStorage , IndexedDB)
 
--MMKV: local storage
-
 -More
 
 # Acknowledgments
