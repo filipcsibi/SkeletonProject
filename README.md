@@ -22,7 +22,7 @@ SeriesFav utilizes the following technologies and libraries:
 
 -MMKV: local storage
 
--+++
+-more
 
 # Acknowledgments
 I would like to express my gratitude to the team at Linnify for providing me with the opportunity to work on this project during my apprenticeship. Their guidance and support were invaluable in creating SeriesFav.
