@@ -17,8 +17,11 @@ Welcome to SeriesFav, a powerful app developed during my apprenticeship at Linni
 SeriesFav utilizes the following technologies and libraries:
 
 -React-Native: With typescript
+
 -Zustand: The Persist middleware enables you to store your Zustand state in a storage (e.g., localStorage , AsyncStorage , IndexedDB)
+
 -MMKV: local storage
+
 -+++
 
 # Acknowledgments
