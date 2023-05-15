@@ -1,11 +1,11 @@
-# seriesfav
+# SeriesFav
 
-
+FIRST :
 ```bash
 npm install
 ```
 
-Then:
+THEN :
 
 ```bash
 npm start
