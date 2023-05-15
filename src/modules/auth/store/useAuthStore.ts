@@ -164,6 +164,6 @@ export const useAuthStore = create(
         else return user?.intrest2;
       },
     }),
-    {name: 'movie-storage-6', storage: createJSONStorage(() => zustandStorage)},
+    {name: 'movie-storage-1', storage: createJSONStorage(() => zustandStorage)},
   ),
 );

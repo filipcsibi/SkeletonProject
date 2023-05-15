@@ -94,7 +94,13 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   icon: {left: 10, top: 22},
-  input: {marginLeft: 35, bottom: 10},
+  input: {
+    marginLeft: 35,
+    bottom: 12,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+  },
   button: {
     backgroundColor: 'white',
     width: '100%',
