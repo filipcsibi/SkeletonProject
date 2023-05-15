@@ -27,10 +27,11 @@ I would like to express my gratitude to the team at Linnify for providing me wit
 # Design
 I'm very proud of myself for this desing, this was straight freestyle.
 
-![Screenshot_20230516_010702_com skeletonproject_50](https://github.com/filipcsibi/seriesfav/assets/117035025/c5d9d98d-60a0-453d-b415-7ba194ce1990)
-![Screenshot_20230516_010550_com skeletonproject_50](https://github.com/filipcsibi/seriesfav/assets/117035025/35735a62-ce92-4343-8a5a-415b2a3db6ae)
-![Screenshot_20230516_010618_com skeletonproject_50](https://github.com/filipcsibi/seriesfav/assets/117035025/747a6ab7-52a4-4856-9b1e-1b7b629577a9)
-![Screenshot_20230516_010625_com skeletonproject_50](https://github.com/filipcsibi/seriesfav/assets/117035025/fc42acbe-d06a-4572-8be0-a52a0af3e510)
-![Screenshot_20230516_010725_com skeletonproject_50](https://github.com/filipcsibi/seriesfav/assets/117035025/4ddd8632-7002-4470-ba16-cd2ba6ceee92)
-![Screenshot_20230516_010629_com skeletonproject_50](https://github.com/filipcsibi/seriesfav/assets/117035025/591a9198-e33f-4d10-a35e-44a87514e772)
-![Screenshot_20230516_010633_com skeletonproject_2_50](https://github.com/filipcsibi/seriesfav/assets/117035025/337769ad-551a-42b4-9513-0b63709a7cd3)
+
+![1](https://github.com/filipcsibi/seriesfav/assets/117035025/98c71024-a27c-4c91-b436-000d4e322014)
+![2](https://github.com/filipcsibi/seriesfav/assets/117035025/fc79cc2b-3245-4a04-99b2-328a60060182)
+![3 (2)](https://github.com/filipcsibi/seriesfav/assets/117035025/644daf38-9c0f-4050-98b1-4dc25d4593be)
+![4 (2)](https://github.com/filipcsibi/seriesfav/assets/117035025/a05a5893-4fcf-461f-bde2-2ff215912dca)
+![5](https://github.com/filipcsibi/seriesfav/assets/117035025/55e9281e-29e6-4824-9a44-41140494b710)!
+[6](https://github.com/filipcsibi/seriesfav/assets/117035025/e4e09069-118e-4afc-8ce4-8f4957f9f10d)
+![7](https://github.com/filipcsibi/seriesfav/assets/117035025/35dad136-1c78-48bc-8b68-6723a57bed88)
