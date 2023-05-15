@@ -26,7 +26,7 @@ SeriesFav utilizes the following technologies and libraries:
 I would like to express my gratitude to the team at Linnify for providing me with the opportunity to work on this project during my apprenticeship. Their guidance and support were invaluable in creating SeriesFav.
 
 # Design
-I'm very proud of myself for this desing, this was straight freestyle.
+I'm very proud of myself for this design, this was straight freestyle.
 
 
 ![1](https://github.com/filipcsibi/seriesfav/assets/117035025/98c71024-a27c-4c91-b436-000d4e322014)
