@@ -4,6 +4,8 @@ import {AuthState, useAuthStore} from '../../auth/store/useAuthStore';
 import ImagePicker from 'react-native-image-crop-picker';
 import {useState, useEffect} from 'react';
 import {User} from '../../auth/types/users';
+import Animated from 'react-native-reanimated';
+import {AnimatedCircle} from '../../../components/animatedcircle';
 
 export const Account = () => {
   const {currentUser, updateUser, getUserIntrests} = useAuthStore(
@@ -17,13 +19,23 @@ export const Account = () => {
   );
 
   const avatar = require('../../../assets/images/pozaavatar.jpeg');
+  const ab = true;
 
   return (
     <View style={styles.main}>
       <Text style={styles.username}>Hi, {currentUser?.userName}!</Text>
-      <Pressable style={styles.avatar}>
-        <Image source={avatar} style={styles.avatarphoto}></Image>
-      </Pressable>
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        {[1, 2, 3].map(item => (
+          <AnimatedCircle index={item}></AnimatedCircle>
+        ))}
+        <Pressable style={styles.avatar}>
+          {ab ? (
+            <Image source={avatar} style={styles.avatarphoto}></Image>
+          ) : (
+            <Text>no</Text>
+          )}
+        </Pressable>
+      </View>
       <View>
         <Text style={styles.text}>My Account</Text>
       </View>
@@ -85,7 +97,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderRadius: 100,
     backgroundColor: 'white',
-    marginBottom: 30,
+    // marginBottom: 30,
   },
 });
 

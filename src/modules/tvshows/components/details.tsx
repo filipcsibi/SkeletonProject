@@ -2,6 +2,11 @@ import {Text, View, Image, StyleSheet, Pressable} from 'react-native';
 import {SeriesStore, useSeriesStore} from '../store/useSeriesStore';
 import {HeartFillIcon, HeartIcon} from '../../../assets/icons';
 import {AuthState, useAuthStore} from '../../auth/store/useAuthStore';
+import Animated, {
+  BounceIn,
+  BounceOut,
+  BounceInDown,
+} from 'react-native-reanimated';
 
 export const MySerieDetails = () => {
   const {currentSerie} = useSeriesStore((state: SeriesStore) => {
@@ -34,6 +39,7 @@ export const MySerieDetails = () => {
 
     if (!direct?.find(fav => fav.id === currentSerie.id)) {
       //getFavorites([...favorites, currentSerie]);
+      console.log(currentUser?.id);
       addFavoritesForUser(currentUser?.id, currentSerie);
 
       console.log('favorited');
@@ -58,12 +64,16 @@ export const MySerieDetails = () => {
           </View>
           <Pressable onPress={handleFavorite}>
             {direct?.find(fav => fav.id === currentSerie?.id) ? (
-              <HeartFillIcon
-                width={50}
-                height={50}
-                fill={'red'}></HeartFillIcon>
+              <Animated.View key={1} entering={BounceIn}>
+                <HeartFillIcon
+                  width={50}
+                  height={50}
+                  fill={'red'}></HeartFillIcon>
+              </Animated.View>
             ) : (
-              <HeartIcon width={50} height={50}></HeartIcon>
+              <Animated.View key={2} entering={BounceInDown}>
+                <HeartIcon width={50} height={50}></HeartIcon>
+              </Animated.View>
             )}
           </Pressable>
         </View>

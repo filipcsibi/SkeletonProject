@@ -43,6 +43,7 @@ export const LoginForm = (props: Props) => {
             value={email}
             onChangeText={setEmail}
             style={styles.input}
+            autoCapitalize="none"
           />
         </View>
         <View style={styles.password}>
@@ -54,7 +55,8 @@ export const LoginForm = (props: Props) => {
           <TextInput
             value={password}
             onChangeText={setPassword}
-            style={styles.input}></TextInput>
+            style={styles.input}
+            autoCapitalize="none"></TextInput>
         </View>
         <View style={styles.button}>
           <Pressable onPress={onPress}>

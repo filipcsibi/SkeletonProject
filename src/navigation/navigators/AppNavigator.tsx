@@ -3,6 +3,8 @@ import {AppRouteProps, AppRoutes} from '../routes/app_routes';
 import {AuthNavigator} from '../../modules/auth/navigation/navigators/AuthNavigator';
 import {MainNavigator} from './MainNavigator';
 import {AuthState, useAuthStore} from '../../modules/auth/store/useAuthStore';
+import RNBootSplash from 'react-native-bootsplash';
+RNBootSplash.hide({fade: true, duration: 500});
 
 const App = createStackNavigator<AppRouteProps>();
 

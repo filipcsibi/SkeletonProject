@@ -20,9 +20,11 @@ import {EditScreen} from './src/modules/account/screens/editaccount';
 
 function App(): JSX.Element {
   return (
-    <NavigationContainer>
-      <AppNavigator></AppNavigator>
-    </NavigationContainer>
+    <SafeAreaView style={{flex: 1}}>
+      <NavigationContainer>
+        <AppNavigator></AppNavigator>
+      </NavigationContainer>
+    </SafeAreaView>
     // <EditScreen></EditScreen>
     // <MovieList></MovieList>
     // <Account>

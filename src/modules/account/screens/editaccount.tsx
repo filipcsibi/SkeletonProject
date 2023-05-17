@@ -14,7 +14,7 @@ export const EditScreen = () => {
   const title = require('../../../assets/images/title.png');
 
   const [email, setEmail] = useState<string>();
-  const [userName, setUserName] = useState<string>('');
+  const [userName, setUserName] = useState<string | undefined>('');
   const [intrest1, setIntrest1] = useState<string>('');
   const [intrest2, setIntrest2] = useState<string>('');
   const {currentUser, updateUser, updateInterest, getUserIntrests} =
@@ -29,6 +29,7 @@ export const EditScreen = () => {
   const onUpdate = () => {
     updateInterest(currentUser?.id, intrest1, '1');
     updateInterest(currentUser?.id, intrest2, '2');
+
     const user = {
       ...currentUser,
       email: email,
@@ -40,6 +41,9 @@ export const EditScreen = () => {
 
     console.log('updated');
   };
+
+  setEmail(currentUser?.email);
+  setUserName(currentUser?.userName);
   return (
     <View style={styles.main}>
       <Image source={title}></Image>
@@ -48,14 +52,14 @@ export const EditScreen = () => {
         <TextInput
           style={{flex: 1}}
           placeholder={currentUser?.email}
-          value={currentUser?.email}
+          value={email}
           onChangeText={setEmail}></TextInput>
       </View>
       <View style={styles.container}>
         <TextInput
           style={{flex: 1}}
           placeholder={currentUser?.userName}
-          value={currentUser?.userName}
+          value={userName}
           onChangeText={setUserName}></TextInput>
       </View>
       <Text style={styles.text}>Interests:</Text>
