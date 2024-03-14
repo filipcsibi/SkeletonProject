@@ -17,8 +17,11 @@ Welcome to SeriesFav, a powerful app developed during my apprenticeship at Linni
 SeriesFav utilizes the following technologies and libraries:
 
 •	This journey involved mastering the art of code structuring and delving into the depths of TypeScript along with exploring various features offered by React Native
+
 •	We used Zustand: localStorage , AsyncStorage , IndexedDB + MMKV
+
 •	Animations with Reanimated, hooks like debounce, SVG handling, modal management, local/global storage manipulation, proper navigation setup, authentication implementation, JSON handling, and API data fetching.
+
 •	This experience underscored the importance of clean, readable code and effective teamwork in application development.
 
 # Acknowledgments
