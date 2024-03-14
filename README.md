@@ -29,12 +29,3 @@ I would like to express my gratitude to the team at Linnify for providing me wit
 
 # Design
 I'm very proud of myself for this design, this was straight freestyle.
-
-
-![1](https://github.com/filipcsibi/seriesfav/assets/117035025/98c71024-a27c-4c91-b436-000d4e322014)
-![2](https://github.com/filipcsibi/seriesfav/assets/117035025/fc79cc2b-3245-4a04-99b2-328a60060182)
-![3 (2)](https://github.com/filipcsibi/seriesfav/assets/117035025/644daf38-9c0f-4050-98b1-4dc25d4593be)
-![4 (2)](https://github.com/filipcsibi/seriesfav/assets/117035025/a05a5893-4fcf-461f-bde2-2ff215912dca)
-![5](https://github.com/filipcsibi/seriesfav/assets/117035025/55e9281e-29e6-4824-9a44-41140494b710)!
-[6](https://github.com/filipcsibi/seriesfav/assets/117035025/e4e09069-118e-4afc-8ce4-8f4957f9f10d)
-![7](https://github.com/filipcsibi/seriesfav/assets/117035025/35dad136-1c78-48bc-8b68-6723a57bed88)
